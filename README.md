@@ -24,18 +24,6 @@ gcloud beta compute --project=the-valheim-server instances create valheim-server
 sudo apt update
 ~~~~
 
-- Install node exporter for the vm Prometheus metrics endpoint:
-
-~~~~
-sudo apt install screen
-cd ~
-wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-amd64.tar.gz
-tar xvfz node_exporter-1.1.2.linux-amd64.tar.gz
-screen
-./node_exporter-1.1.2.linux-amd64/node_exporter
-# Detach Screen: ctrl + A D 
-~~~~
-
 - Create sudoer user steam with home /home/steam:
 
 ~~~~
@@ -53,15 +41,6 @@ mkdir -p /home/steam/valheim
 
 ~~~~
 curl https://get.docker.com | sh
-~~~~
-
-- Config Prometheus Docker Monitoring endpoint by creating file ``/etc/docker/daemon.json`` with the content:
-
-~~~~
-{
-  "metrics-addr" : "0.0.0.0:9323",
-  "experimental" : true
-}
 ~~~~
 
 - Enable and Start Docker
