@@ -11,4 +11,5 @@ sudo su steam
 [ -d /home/steam/valheim/config/ ] || mkdir /home/steam/valheim/config/
 
 # sudo gsutil cp $BUCKET$LATEST_BACKUP_NAME $HOME
-sudo unzip $LATEST_BACKUP_NAME -d /home/steam/valheim/config/
+# sudo unzip $LATEST_BACKUP_NAME -d /home/steam/valheim/config/
+sudo unzip $LATEST_BACKUP_NAME -d /home/steam/valheim/restore/
