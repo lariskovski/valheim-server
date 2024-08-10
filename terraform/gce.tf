@@ -1,5 +1,5 @@
 resource "google_service_account" "default" {
-  account_id   = "${var.application}-custom-sa"
+  account_id   = var.application
   display_name = "Custom SA for VM Instance"
 }
 
