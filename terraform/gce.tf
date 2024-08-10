@@ -12,8 +12,8 @@ resource "google_compute_instance" "default" {
 
   boot_disk {
     initialize_params {
-      # image = "debian-cloud/debian-11"
-      image = "ubuntu-2004-lts/ubuntu-2004-focal-v20240808"
+      # gcloud compute images list | grep ubuntu
+      image = "ubuntu-pro-2404-lts-amd64/ubuntu-pro-2404-noble-amd64-v20240725"
       # labels = {
       #   my_label = "value"
       # }
