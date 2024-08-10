@@ -10,15 +10,15 @@ resource "google_compute_instance" "default" {
 
   # tags = ["foo", "bar"]
 
-  # boot_disk {
-  #   initialize_params {
-  #     image = "debian-cloud/debian-11"
-  #     image = "ubuntu-2004-lts/ubuntu-2004-focal-v20240808"
-  #     labels = {
-  #       my_label = "value"
-  #     }
-  #   }
-  # }
+  boot_disk {
+    initialize_params {
+      # image = "debian-cloud/debian-11"
+      image = "ubuntu-2004-lts/ubuntu-2004-focal-v20240808"
+      # labels = {
+      #   my_label = "value"
+      # }
+    }
+  }
 
   // Local SSD disk
   # scratch_disk {
