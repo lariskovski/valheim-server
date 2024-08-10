@@ -13,7 +13,8 @@ resource "google_compute_instance" "default" {
   boot_disk {
     initialize_params {
       # gcloud compute images list | grep ubuntu
-      image = "ubuntu-pro-2404-lts-amd64/ubuntu-pro-2404-noble-amd64-v20240725"
+      # project/family
+      image = "ubuntu-os-cloud/ubuntu-minimal-2004-lts"
       # labels = {
       #   my_label = "value"
       # }
