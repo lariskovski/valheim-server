@@ -5,7 +5,7 @@ resource "google_storage_bucket_access_control" "default" {
 }
 
 resource "google_storage_bucket" "default" {
-    name            = valheim-server-ashlands
+    name            = "valheim-server-ashlands"
     location        = "US-CENTRAL1"
     storage_class   = "STANDARD"
 
