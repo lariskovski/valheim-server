@@ -1,7 +1,15 @@
-resource "google_storage_bucket_access_control" "default" {
+data "google_iam_policy" "default" {
+  binding {
+    role = "roles/storage.admin"
+    members = [
+      "user:${google_service_account.default.email}",
+    ]
+  }
+}
+
+resource "google_storage_bucket_iam_policy" "policy" {
   bucket = google_storage_bucket.default.name
-  role   = "WRITER"
-  entity = google_service_account.default.email
+  policy_data = data.google_iam_policy.default.policy_data
 }
 
 resource "google_storage_bucket" "default" {
