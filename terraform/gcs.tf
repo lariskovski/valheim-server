@@ -15,17 +15,17 @@ module "gcs_buckets" {
   # }
 }
 
-# data "google_iam_policy" "default" {
-#     binding {
-#         role = "roles/storage.admin"
-#         members = [
-#         "serviceAccount:${google_service_account.default.email}",
-#         ]
-#     }
-#     depends_on = [
-#         google_service_account.default
-#     ]
-# }
+data "google_iam_policy" "default" {
+    binding {
+        role = "roles/storage.admin"
+        members = [
+        "serviceAccount:${google_service_account.default.email}",
+        ]
+    }
+    depends_on = [
+        google_service_account.default
+    ]
+}
 
 # resource "google_storage_bucket" "default" {
 #     # name is fixed because startup.sh depends on it
