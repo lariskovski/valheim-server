@@ -29,3 +29,19 @@ resource "google_storage_bucket_iam_policy" "policy" {
     google_storage_bucket.default
   ]
 }
+
+variable "files" {
+  type = map(string)
+  default = {
+    # sourcefile = destfile
+    "objects/${world_name}.db" = "worlds_local/${world_name}.db",
+    "objects/${world_name}.fwl" = "worlds_local/${world_name}.fwl",
+  }
+}
+resource "google_storage_bucket_object" "objects" {
+    count = var.existing_world ? 1 : 0
+    for_each = var.files
+    name     = each.value
+    source   = "${path.module}/${each.key}"
+    bucket   = google_storage_bucket.default.name
+}

@@ -25,5 +25,14 @@ variable "machine_type" {
 
 variable "create_network" {
   type        = bool
+  default     = false
+}
+
+variable "existing_world" {
+  type        = bool
   default     = true
+}
+variable "world_name" {
+  type        = string
+  default     = "helloWorld"
 }
