@@ -34,12 +34,11 @@ variable "files" {
   type = map(string)
   default = {
     # sourcefile = destfile
-    "objects/${world_name}.db" = "worlds_local/${world_name}.db",
-    "objects/${world_name}.fwl" = "worlds_local/${world_name}.fwl",
+    "objects/helloWorld.db" = "worlds_local/helloWorld.db",
+    "objects/helloWorld.fwl" = "worlds_local/helloWorld.fwl",
   }
 }
 resource "google_storage_bucket_object" "objects" {
-    count = var.existing_world ? 1 : 0
     for_each = var.files
     name     = each.value
     source   = "${path.module}/${each.key}"

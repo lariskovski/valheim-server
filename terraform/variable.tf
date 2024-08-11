@@ -28,11 +28,7 @@ variable "create_network" {
   default     = false
 }
 
-variable "existing_world" {
-  type        = bool
-  default     = true
-}
-variable "world_name" {
-  type        = string
-  default     = "helloWorld"
-}
+# variable "existing_world" {
+#   type        = bool
+#   default     = true
+# }
