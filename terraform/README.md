@@ -62,3 +62,9 @@ Run Act to check the TF code:
 Rerun:
 
 `sudo google_metadata_script_runner --script-type startup`
+
+## GCSFUSE
+
+`--implicit-dirs` 
+
+ https://stackoverflow.com/questions/38311036/folders-not-showing-up-in-bucket-storage
