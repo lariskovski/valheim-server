@@ -58,4 +58,7 @@ resource "google_storage_bucket_object" "objects" {
     source   = "${path.module}/${each.key}"
     # bucket   = google_storage_bucket.default.name
     bucket   = var.application
+    depends_on = [
+      module.gcs_buckets
+    ]
 }
