@@ -37,4 +37,5 @@ fi
 # criar nfs pra /home/steam/valheim
 # fazer o mount do nfs no script  de startup
 # user gcsfuse pra um diretorio de backup onde sera copiado/syncado a cada 30min tudo de /home/steam/valheim (ou so da pasta de backup)
+# ou nao user o gcsfuse e somente adicionar um cron para copiar dos backups pro gcs
 # se no bucket do gcsfuse tiver um mundo em /worlds_local cujo nome nao é helloWorld, copiar os mundos para o NFS no path /home/steam/valheim/config/worlds/_local antes do start do docker container
