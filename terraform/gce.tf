@@ -27,7 +27,7 @@ resource "google_compute_instance" "default" {
   # }
 
   network_interface {
-    network = "default"
+    network = var.create_network ? module.vpc[0].network_name : data.google_compute_network.default[0].name
 
     access_config {
       // Ephemeral public IP
@@ -38,7 +38,6 @@ resource "google_compute_instance" "default" {
     app = var.application
   }
 
-  # metadata_startup_script = "install fuse and valheim setup script"
   metadata_startup_script = file("${path.module}/startup.sh")
 
   service_account {

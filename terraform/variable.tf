@@ -22,3 +22,8 @@ variable "machine_type" {
   type        = string
   default     = "e2-medium"
 }
+
+variable "create_network" {
+  type        = bool
+  default     = true
+}
