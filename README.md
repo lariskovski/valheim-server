@@ -71,3 +71,7 @@ sudo docker run -d --restart always\
 ```
 (crontab -l ; echo "0,30 * * * * gsutil -m rsync -d -r /home/steam/valheim/config/backups gs://valheim-world-backup/backups &>> /home/steam/valheim/cron-backup.logs") | crontab -
 ```
+
+### Existing Worlds
+
+Add the .db and .fwl files on `terraform/objects` and change the variable `existing_world` to `true`.

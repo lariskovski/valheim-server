@@ -35,3 +35,8 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Ignore everything in objects file execpt the example file
+objects/*
+!objects/helloWorld.db
+!objects/helloWorld.fwl

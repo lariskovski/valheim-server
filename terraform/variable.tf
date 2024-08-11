@@ -25,5 +25,10 @@ variable "machine_type" {
 
 variable "create_network" {
   type        = bool
-  default     = true
+  default     = false
 }
+
+# variable "existing_world" {
+#   type        = bool
+#   default     = true
+# }
