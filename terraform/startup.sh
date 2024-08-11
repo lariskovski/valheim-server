@@ -15,12 +15,13 @@ if [ ! -d "$DIRECTORY" ]; then
     sudo apt-get update && sudo apt-get install fuse gcsfuse -y
     # remember to add SA permission to read and write to the bucket before the next steps
     mkdir -p $DIRECTORY
-    gcsfuse valheim-server-ashlands "$DIRECTORY"
+    gcsfuse  --implicit-dirs valheim-server-ashlands "$DIRECTORY"
 
     # Run the container
     # sudo docker run -d --restart always\
     #     --name valheim-server \
     #     --cap-add=sys_nice \
+    #     --privileged \
     #     --stop-timeout 120 \
     #     -p 2456-2457:2456-2457/udp \
     #     -v $DIRECTORY/restore/worlds:/config/worlds \
@@ -31,3 +32,10 @@ if [ ! -d "$DIRECTORY" ]; then
     #     -e SERVER_PASS="" \
     #     lloesche/valheim-server
 fi
+
+## ideia
+# criar nfs pra /home/steam/valheim
+# fazer o mount do nfs no script  de startup
+# user gcsfuse pra um diretorio de backup onde sera copiado/syncado a cada 30min tudo de /home/steam/valheim (ou so da pasta de backup)
+# ou nao user o gcsfuse e somente adicionar um cron para copiar dos backups pro gcs
+# se no bucket do gcsfuse tiver um mundo em /worlds_local cujo nome nao é helloWorld, copiar os mundos para o NFS no path /home/steam/valheim/config/worlds/_local antes do start do docker container
