@@ -25,5 +25,5 @@ variable "machine_type" {
 
 variable "create_network" {
   type        = bool
-  default     = false
+  default     = true
 }
