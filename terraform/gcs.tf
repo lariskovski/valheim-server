@@ -1,3 +1,6 @@
+# owner permission to the service account running on terraform cloud
+# is not enough to do this permission giving
+# add storage admin to it for a successfull run
 data "google_iam_policy" "default" {
     binding {
         role = "roles/storage.admin"
