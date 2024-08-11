@@ -13,6 +13,9 @@ module "gcs_buckets" {
   # bucket_admins = {
   #   second = "user:spam@example.com,user:eggs@example.com"
   # }
+  depends_on = [
+    google_compute_instance.default
+  ]
 }
 
 data "google_iam_policy" "default" {
