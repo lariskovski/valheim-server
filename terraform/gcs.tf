@@ -43,7 +43,6 @@ resource "google_storage_bucket_object" "objects" {
     name     = each.value
     source   = "${path.module}/${each.key}"
     bucket   = google_storage_bucket.default.name
-    bucket   = var.application
     # depends_on = [
     #   google_storage_bucket.default
     # ]
