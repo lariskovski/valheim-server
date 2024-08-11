@@ -27,7 +27,7 @@ resource "google_compute_instance" "default" {
   # }
 
   network_interface {
-    network = var.create_network ? module.vpc.network_name : data.google_compute_network.default.name
+    network = var.create_network ? module.vpc[0].network_name : data.google_compute_network.default[0].name
 
     access_config {
       // Ephemeral public IP
