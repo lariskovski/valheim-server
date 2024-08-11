@@ -6,7 +6,7 @@ module "gcs_buckets" {
   version = "~> 6.0"
   project_id  = var.project_id
   # name is fixed because startup.sh depends on it
-  names = ["valheim-server-ashlands"]
+  names = [var.application]
   location = "US-CENTRAL1"
   set_admin_roles = true
   admins = ["serviceAccount:${google_service_account.default.email}"]
@@ -57,5 +57,5 @@ resource "google_storage_bucket_object" "objects" {
     name     = each.value
     source   = "${path.module}/${each.key}"
     # bucket   = google_storage_bucket.default.name
-    bucket   = module.gcs_buckets.names[0]
+    bucket   = var.application
 }
