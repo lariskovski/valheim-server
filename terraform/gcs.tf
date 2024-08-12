@@ -18,6 +18,8 @@ resource "google_storage_bucket" "default" {
     name            = "valheim-server-ashlands"
     location        = "US-CENTRAL1"
     storage_class   = "STANDARD"
+    # explicitly noting not to destroy bucket if there are objects
+    force_destroy   = false
 
     uniform_bucket_level_access = true
 }
@@ -30,20 +32,9 @@ resource "google_storage_bucket_iam_policy" "policy" {
   ]
 }
 
-variable "files" {
-  type = map(string)
-  default = {
-    # sourcefile = destfile
-    "objects/helloWorld.db" = "worlds_local/helloWorld.db",
-    "objects/helloWorld.fwl" = "worlds_local/helloWorld.fwl",
-  }
-}
 resource "google_storage_bucket_object" "objects" {
-    for_each = var.files
-    name     = each.value
-    source   = "${path.module}/${each.key}"
-    bucket   = google_storage_bucket.default.name
-    # depends_on = [
-    #   google_storage_bucket.default
-    # ]
+    count   = length(var.files) > 0 ? length(var.files) : 0
+    name    = each.value
+    source  = "${path.module}/objects/${var.files[count.index]}"
+    bucket  = google_storage_bucket.default.name
 }
