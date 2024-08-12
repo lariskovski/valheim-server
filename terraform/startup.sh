@@ -1,5 +1,7 @@
 #! /bin/bash
 DIRECTORY=/home/steam/valheim
+BUCKET=valheim-server-ashlands
+
 if [ ! -d "$DIRECTORY" ]; then
     sudo timedatectl set-timezone America/Sao_Paulo
     ## Install and setup Docker
@@ -7,15 +9,15 @@ if [ ! -d "$DIRECTORY" ]; then
     sudo systemctl enable docker
     sudo systemctl start docker
 
-    # Install and setup FUSE
-    # https://cloud.google.com/storage/docs/gcsfuse-quickstart-mount-bucket
-    export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s`
-    echo "deb https://packages.cloud.google.com/apt $GCSFUSE_REPO main" | sudo tee /etc/apt/sources.list.d/gcsfuse.list
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-    sudo apt-get update && sudo apt-get install fuse gcsfuse -y
-    # remember to add SA permission to read and write to the bucket before the next steps
-    mkdir -p $DIRECTORY
-    gcsfuse  --implicit-dirs valheim-server-ashlands "$DIRECTORY"
+    # # check if files exists in bucket
+    # FILES=$(gsutil ls gs://$BUCKET)
+    # # if exists check if file is zip
+    # if [[ $file =~ \.zip$ ]]
+    # then
+    #     gsutil cp gs://$BUCKET/worldBackups/$FILES /tmp
+    #     sudo unzip /tmp/$LATEST_BACKUP_NAME -d $DIRECTORY/config/worlds_local/
+    # fi
+    # if there are files and are not zip, just copy everything to worlds_local
 
     # Run the container
     # sudo docker run -d --restart always\
@@ -31,11 +33,7 @@ if [ ! -d "$DIRECTORY" ]; then
     #     -e WORLD_NAME="The Vik Zon" \
     #     -e SERVER_PASS="" \
     #     lloesche/valheim-server
+ 
+    # Add backup cron job
+    # (crontab -l ; echo "0,30 * * * * gsutil -m rsync -d -r /home/steam/valheim/config/backups gs://$BUCKET/worldBackups &>> /home/steam/valheim/cron-backup.logs") | crontab -
 fi
-
-## ideia
-# criar nfs pra /home/steam/valheim
-# fazer o mount do nfs no script  de startup
-# user gcsfuse pra um diretorio de backup onde sera copiado/syncado a cada 30min tudo de /home/steam/valheim (ou so da pasta de backup)
-# ou nao user o gcsfuse e somente adicionar um cron para copiar dos backups pro gcs
-# se no bucket do gcsfuse tiver um mundo em /worlds_local cujo nome nao é helloWorld, copiar os mundos para o NFS no path /home/steam/valheim/config/worlds/_local antes do start do docker container
