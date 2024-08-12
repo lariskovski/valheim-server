@@ -19,11 +19,11 @@ if [ ! -d "$DIRECTORY" ]; then
     # fi
     # if there are files and are not zip, just copy everything to worlds_local
 
-
     # Run the container
     # sudo docker run -d --restart always\
     #     --name valheim-server \
     #     --cap-add=sys_nice \
+    #     --privileged \
     #     --stop-timeout 120 \
     #     -p 2456-2457:2456-2457/udp \
     #     -v $DIRECTORY/restore/worlds:/config/worlds \
@@ -33,7 +33,7 @@ if [ ! -d "$DIRECTORY" ]; then
     #     -e WORLD_NAME="The Vik Zon" \
     #     -e SERVER_PASS="" \
     #     lloesche/valheim-server
-    
+ 
     # Add backup cron job
     # (crontab -l ; echo "0,30 * * * * gsutil -m rsync -d -r /home/steam/valheim/config/backups gs://$BUCKET/worldBackups &>> /home/steam/valheim/cron-backup.logs") | crontab -
 fi
