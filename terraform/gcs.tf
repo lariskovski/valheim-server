@@ -34,7 +34,7 @@ resource "google_storage_bucket_iam_policy" "policy" {
 
 resource "google_storage_bucket_object" "objects" {
     count   = length(var.files) > 0 ? length(var.files) : 0
-    name    = each.value
+    name    = "worlds_local/${var.files[count.index]"
     source  = "${path.module}/objects/${var.files[count.index]}"
     bucket  = google_storage_bucket.default.name
 }
